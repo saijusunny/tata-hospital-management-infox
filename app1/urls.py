@@ -29,6 +29,8 @@ urlpatterns = [
     path('login_staff', views.login_staff, name="login_staff"),
     path('staff_home', views.staff_home, name="staff_home"),
     path('login_stf', views.login_stf, name="login_stf"),
+    path('staff_logs', views.staff_logs, name="staff_logs"),
+    
 
     
 #*********************************************************************************************
@@ -43,6 +45,7 @@ urlpatterns = [
     path('doctor_home', views.doctor_home, name="doctor_home"),
     path('doctor_stf', views.doctor_stf, name="doctor_stf"),
     path('pro_doctor',views.pro_doctor,name='pro_doctor'),
+    path('doctor_logs', views.doctor_logs, name="doctor_logs"),
     
 #**********************************************************************************************************
     
@@ -52,6 +55,7 @@ urlpatterns = [
 path('patient_reg_page', views.patient_reg_page, name='patient_reg_page'),
 path('patient_reg', views.patient_reg, name='patient_reg'),
 path('patient_view_doctor', views.patient_view_doctor, name='patient_view_doctor'),
+path('delete_patient/<int:pk>', views.delete_patient, name='delete_patient'),
 #*************************************************************************************************************
 
 
@@ -65,11 +69,16 @@ path('patient_view_doctor', views.patient_view_doctor, name='patient_view_doctor
 
 
 #---------------------------------section----------------------------
-path('sections',views.sections, name='sections'),
+path('section_view',views.section_view, name='section_view'),
 path('add_section',views.add_section, name='add_section'),
 path('course1',views.course1, name='course1'),
 path('log',views.log, name='log'),
 path('staffreg',views.staffreg, name='staffreg'),
+path('edit_section/<int:pk>',views.edit_section, name='edit_section'),
+path('section_edit/<int:pk>',views.section_edit, name='section_edit'),
+path('delete_section/<int:pk>',views.delete_section, name='delete_section'),
+
+
 
 #------------------------------adminb Views----------------
 path('admin_doct_view', views.admin_doct_view, name='admin_doct_view'),
@@ -79,6 +88,8 @@ path('signup_details', views.signup_details, name='signup_details'),
 path('complete_pro', views.complete_pro, name='complete_pro'),
 path('profile_admin', views.profile_admin, name='profile_admin'),
 path('edit_details/<int:pk>', views.edit_details, name='edit_details'),
-  path('edit_admin_pro/<int:pk>', views.edit_admin_pro, name='edit_admin_pro'),
+path('edit_admin_pro/<int:pk>', views.edit_admin_pro, name='edit_admin_pro'),
+path('aprove/<int:pk>',views.aprove, name='aprove'),
+path('send_aprove',views.send_aprove, name='send_aprove'),
 
 ]
