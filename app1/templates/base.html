@@ -45,6 +45,9 @@
               <li class="nav-item">
                 <a class="nav-link {% if request.resolver_match.url_name == 'admin_patient_view'%} active {% endif %}" href="{% url 'admin_patient_view'%}">Patients</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == 'profile_admin'%} active {% endif %}" href="{% url 'profile_admin'%}">Profile</a>
+              </li>
               
               
             </ul>
@@ -66,6 +69,7 @@
               <li class="nav-item">
                 <a class="nav-link {% if request.resolver_match.url_name == 'doctor_login'%} active {% endif %}" href="{% url 'doctor_login'%}">Doctor Login</a>
               </li>
+
 
               
           </ul>

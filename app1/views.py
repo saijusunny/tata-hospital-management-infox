@@ -1,5 +1,6 @@
 
 
+import os
 from pydoc import doc
 from unicodedata import name
 from urllib import request
@@ -10,6 +11,7 @@ from django.contrib.auth import authenticate, login, logout # visable pages usin
 from  django.contrib.auth.decorators import login_required
 from app1.models import patient, staff, section
 from app1.models import doctor
+from .models import userlogin
 
 def index(request):
     return render(request, 'index.html')
@@ -369,3 +371,75 @@ def admin_staff_view(request):
 def admin_patient_view(request):
     dt=patient.objects.all()
     return render(request, 'admin_patient details.html', {'dt':dt})
+
+
+#admin signup
+#compltet profile section
+@login_required(login_url='adminlogin')
+def signup_details(request):
+    if request.method == "POST":
+        nm=request.POST['name']
+        uname=request.POST['username']
+        upass=request.POST['password']
+        repas=request.POST['repassword']
+        if request.FILES.get('file') is not None:
+            image=request.FILES['file']
+        else:
+            image = "static/image/icon.png"
+        eum=request.POST['email']
+        uid= User.objects.get(id=request.user.id)
+        print(uid)
+
+        result=userlogin(
+            name=nm,
+            username=uname,
+            password=upass,
+            repassword=repas,
+            image=image,
+            email=eum,
+            user=uid,
+                            
+            )
+        result.save()
+        return redirect('profile_admin')
+
+
+@login_required(login_url='adminlogin')
+def complete_pro(request):
+    return render(request,'admin_signup_pro.html')
+
+@login_required(login_url='adminlogin')
+def profile_admin(request):
+    result=userlogin.objects.filter(user=request.user.id).last()
+    return render(request,'profile_admin.html', {'result':result})
+
+@login_required(login_url='adminlogin')
+def edit_admin_pro(request,pk):
+    products=userlogin.objects.get(id=pk)
+    return render(request,'admin_edit.html', {'products':products})
+
+@login_required(login_url='adminlogin')
+def edit_details(request,pk):
+    if request.method=='POST':
+        products = userlogin.objects.get(id=pk)
+        products.name=request.POST.get('name')
+        products.username=request.POST.get('username')
+        products.password=request.POST.get('password')
+        products.repassword=request.POST.get('repassword')
+        products.email=request.POST.get('email')
+        # if len(products.image)>0:
+        #     os.remove(products.image.path)
+        if request.FILES.get('file') is not None:
+            print('hai')
+            if not products.image =="static/image/icon.png":
+                os.remove(products.image.path)
+                products.image = request.FILES['file']
+            else:
+                products.image = request.FILES['file']
+        else:
+            os.remove(products.image.path)
+            products.image ="static/image/icon.png"
+        
+        products.save()
+        return redirect('profile_admin')
+    return render(request, 'admin_edit.html')

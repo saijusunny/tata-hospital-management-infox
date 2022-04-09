@@ -75,5 +75,10 @@ path('staffreg',views.staffreg, name='staffreg'),
 path('admin_doct_view', views.admin_doct_view, name='admin_doct_view'),
 path('admin_staff_view', views.admin_staff_view, name='admin_staff_view'),
 path('admin_patient_view', views.admin_patient_view, name='admin_patient_view'),
+path('signup_details', views.signup_details, name='signup_details'),
+path('complete_pro', views.complete_pro, name='complete_pro'),
+path('profile_admin', views.profile_admin, name='profile_admin'),
+path('edit_details/<int:pk>', views.edit_details, name='edit_details'),
+  path('edit_admin_pro/<int:pk>', views.edit_admin_pro, name='edit_admin_pro'),
 
 ]
